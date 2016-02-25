@@ -1,0 +1,25 @@
+{
+  "types": [
+
+  ],
+  "project_page": "https://github.com/jcraigbrown/artifactory",
+  "description": "Puppet module to download Maven Artifacts from Artifactory",
+  "source": "https://github.com/jcraigbrown/artifactory.git",
+  "summary": "Download Maven Artifacts from Artifactory",
+  "dependencies": [
+
+  ],
+  "checksums": {
+    "manifests/init.pp": "b2ed950a8601df47b3691f9a82481609",
+    "files/download-artifact-from-artifactory.sh": "a07662141dbea7c132c914af4b8065b6",
+    "README.md": "e8b943696e687708ae1ed3e745b990b8",
+    "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+    "manifests/artifact.pp": "98dde60b1271eb6499bf980c384ec46f",
+    "Modulefile": "349dc8f960950ac1093c29a251c785a9",
+    "tests/init.pp": "9793fe279ce2a4821912d49e82586fc0"
+  },
+  "license": "Apache License, Version 2.0",
+  "name": "jcraigbrown-artifactory",
+  "version": "0.0.3",
+  "author": "J. Craig Brown"
+}

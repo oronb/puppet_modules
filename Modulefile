@@ -1,0 +1,8 @@
+name    'jcraigbrown-artifactory'
+version '0.0.3'
+source 'https://github.com/jcraigbrown/artifactory.git'
+author 'J. Craig Brown'
+license 'Apache License, Version 2.0'
+summary 'Download Maven Artifacts from Artifactory'
+description 'Puppet module to download Maven Artifacts from Artifactory'
+project_page 'https://github.com/jcraigbrown/artifactory'
