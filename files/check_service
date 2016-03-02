@@ -1,0 +1,13 @@
+#! /bin/bash
+master=$1
+port=$2
+service=$3
+depended=$4
+
+nc -zv $master $port
+if [ $? -eq "0" ]
+then
+    /tmp/ensure_service $service start $master $depended
+else
+   /tmp/ensure_service $service stop $master $depended
+fi
