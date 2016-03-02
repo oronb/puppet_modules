@@ -13,9 +13,9 @@ class cluster2 (
                tries   => "5",
 	       try_sleep => "10",
 	}
-        exec { 'stop ${service}':
-               command => "/etc/init.d/${service} stop",
-               unless  => "/bin/nc -zv ${master} ${port}",
-	       onlyif  => "/etc/init.d/${service} status",
-	}
+        #exec { 'stop ${service}':
+        #       command => "/etc/init.d/${service} stop",
+        #       unless  => "/bin/nc -zv ${master} ${port}",
+	#       onlyif  => "/etc/init.d/${service} status",
+	#}
 }
