@@ -1,42 +1,21 @@
-# == Class: artifactory
-#
-# This class installs and configures artifactory
-#
-#
-# === Parameters
-#
-# [*ensure*]
-#   String.  Version of artifactory to be installed or latest/present
-#   Default: latest
-#
-# [*version*]
-#   String.  Version of artifactory to be installed or latest/present
-#   Default: latest
-#
-# [*java_version*}
-#   String.  Version of java be installed or latest/present
-#   Default: latest
-#
-# === Examples
-#
-# * Installation:
-#     class { 'artifactory': }
-#
-#
-# === Authors
-#   Oron Bortman <oronb:orong1234@gmail.com
-# * Justin Lambert <mailto:jlambert@letsevenup.com>
-#
-class artfiactory(
-  $ensure           = 'latest',
-  $version          = '4.4.3',
-  $java_version     = '8',
-  $ajp_port         = '8019',
-) {
-  
-  class { 'artfiactory::java': } ->
-  class { 'artfiactory::install': } ->
-  class { 'artfiactory::config': } ->
-  class { 'artfiactory::service': }
+#cluster_2
 
+class cluster2 (   
+      $service = undef,
+      $master  = undef,
+      $port    = 8080,
+     
+) {
+        exec { 'start ${service}':
+               command => "/etc/init.d/${service} start; exit 1; echo 'finish success' > %2",
+	       onlyif  => "/bin/nc -zv ${master} ${port}",
+	       unless  => "/etc/init.d/${service} status",
+               tries   => "5",
+	       try_sleep => "10",
+	}
+        exec { 'stop ${service}':
+               command => "/etc/init.d/${service} stop",
+               unless  => "/bin/nc -zv ${master} ${port}",
+	       onlyif  => "/etc/init.d/${service} status",
+	}
 }
