@@ -1,4 +1,4 @@
-# Resource: artifactory::artifact
+# Resource: artifactory::artifact!
 #
 # This resource downloads Maven Artifacts from Artifactory
 #
