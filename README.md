@@ -58,12 +58,3 @@ License
 -------
 
 This project is licensed under the Apache License, Version 2.0.
-
-:))))
-<<<<<<< HEAD
-
-
-bbbbbbbbbbbbbbbb
-=======
-asdfasdf
->>>>>>> 04405a217397ed191ceda3332cead89dfc931439
