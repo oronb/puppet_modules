@@ -78,30 +78,36 @@ define artifactory::artifact (
         #class { 'artifactory::artifact': }
 
   Exec { path => ['/bin', '/sbin', '/usr/bin', '/usr/sbin'], }
-	
+  
 	file { "/tmp/download_artifactory.sh":
 	       source  => "puppet:///modules/artifactory/download_artifactory.sh",	  
 	       owner    => 'root',
-  	       mode     => '0777'
+  	       mode     => '0755',
 	}
 	file { "/${output}/${jenkins_build}":
                 source  => "puppet:///modules/artifactory/${jenkins_build}"
         }
-	file { "/tmp/unzip.sh":
-               source  => "puppet:///modules/artifactory/unzip.sh",
-               owner    => 'root',
-               mode     => '0777'
-        }
 
-	
 	exec {'download artifactory':
-		command => "/tmp/download_artifactory.sh ${url} ${repository} ${output} ${user} ${password} ${jenkins_build}"
+		command => "/tmp/download_artifactory.sh ${url} ${repository} ${output} ${user} ${password} ${jenkins_build}",
               }
 	
         if $type == "zip"
 	{
-		exec {'unzip':
-			command => "/tmp/unzip.sh ${path} ${jenkins_build} ${output}"
-		 }
+	       package { 'unzip':
+                 ensure => 'installed',
+                 notify => File['/tmp/unzip.sh'],
+                 }
+	       file { "/tmp/unzip.sh":
+                 source   => "puppet:///modules/artifactory/unzip.sh",
+                 owner    => 'root',
+                 mode     => '0755',
+                 require  => Package['unzip'],
+                 notify   => Exec['unzip'],
+               }
+	       exec {'unzip':
+               	command => "/tmp/unzip.sh ${path} ${jenkins_build} ${output}",
+		require  => [Package['unzip'],File['/tmp/unzip.sh']]
+	       }
 	}
   }
