@@ -1,4 +1,4 @@
-Puppet Module for Artifactory
+Module for Artifactory
 =============================
 
 A Puppet module which downloads artifacts from an Artifactory repository.
