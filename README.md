@@ -1,6 +1,6 @@
-Puppet Module for Artifactory
-=============================
+# puppet_artifactory
 
+<<<<<<< HEAD
 A Puppet module which downloads artifacts from an Artifactory repository.
 
 It supports:
@@ -58,3 +58,9 @@ License
 -------
 
 This project is licensed under the Apache License, Version 2.0.
+=======
+This module just install artifactory.
+Compatible with Redhat and Debian osfamily. 
+
+Tested on RedHat and Ubuntu
+>>>>>>> origin/cluster

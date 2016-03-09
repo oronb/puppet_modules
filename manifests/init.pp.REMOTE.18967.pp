@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-#init.pp
-
-class test {
-       file {'/tmp/test':
-             content => 'test succeed!'
-       }
-=======
 #cluster_2
 
 class cluster2 (   
@@ -26,5 +18,4 @@ class cluster2 (
         #       unless  => "/bin/nc -zv ${master} ${port}",
 	#       onlyif  => "/etc/init.d/${service} status",
 	#}
->>>>>>> origin/cluster
 }
