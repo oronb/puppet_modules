@@ -1,4 +1,4 @@
-# puppet_artifactory
+# puppet_artifactoryaaaa
 
 This module just install artifactory.
 Compatible with Redhat and Debian osfamily. 
