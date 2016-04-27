@@ -1,0 +1,11 @@
+#init.pp
+
+define ibm_installation_manager::windows::uninstall (
+$package_folder="C:\ProgramData\IBM\Installation Manager",
+$pkg = "uninstallc.exe",){
+
+ package { "${pkg}":
+   ensure   => installed,
+   source   => "${package_folder}\\${pkg}",
+   }
+}
