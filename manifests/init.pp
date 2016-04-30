@@ -55,63 +55,20 @@
 # Copyright 2015 Puppet Labs, Inc, unless otherwise noted.
 #
 class ibm_installation_manager (
-  $deploy_source = false,
-  $source        = undef,
-  $target        = '/opt/IBM/InstallationManager',
-  $source_dir    = '/opt/IBM/tmp/InstallationManager',
-  $user          = 'root',
-  $group         = 'root',
-  $options       = undef,
-  $timeout       = '900',
+ $status           = undef,
+ $package          = "IBM Installation Manager",
+ $install_folder   = "Install_Mgr_V1.6.2",
+ $source           = "puppet:///modules/ibm_installation_manager/Install_Mgr_V1.6.2",
+ $tempdir          = "C:\Windows\Temp",
+ $install_options  = "-log installation_manager -acceptLicense",
+ $uninstall_folder = "C:\Documents and Settings\All Users\Application Data\IBM\Installation Manager\uninstall", )
+
 ) {
+  case $osfamily {
 
-  validate_bool($deploy_source)
-  validate_absolute_path($source_dir)
-  validate_absolute_path($target)
-  validate_string($options)
-  validate_string($user)
-  validate_string($group)
-
-  $timestamp  = chomp(generate('/bin/date', '+%Y%d%m_%H%M%S'))
-
-  if !$options {
-    $_options = "-acceptLicense -s -log /tmp/IM_install.${timestamp}.log.xml -installationDirectory ${target}"
-  } else {
-    $_options = $options
+  'Windows': {
+	include ibm_installation_manager::windows
   }
-
-  if $deploy_source {
-
-    exec { "mkdir -p ${source_dir}":
-      creates => $source_dir,
-      path    => '/bin:/usr/bin:/sbin:/usr/sbin',
-    }
-
-    file { $source_dir:
-      ensure => 'directory',
-      owner  => $user,
-      group  => $group,
-    }
-    if $source {
-      staging::deploy { 'ibm_im.zip':
-        source  => $source,
-        target  => $source_dir,
-        creates => "${source_dir}/tools/imcl",
-        require => File[$source_dir],
-        before  => Exec['Install IBM Installation Manager'],
-      }
-    }
-    else {
-      fail("${module_name} requires a source parameter to be set.")
-    }
-  }
-
-  exec { 'Install IBM Installation Manager':
-    command => "${source_dir}/installc ${_options}",
-    creates => "${target}/eclipse/tools/imcl",
-    cwd     => $source_dir,
-    user    => $user,
-    timeout => $timeout,
-  }
-
+ }
 }
+
